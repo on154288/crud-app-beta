@@ -57,5 +57,9 @@
 			@endforeach
 		<tbody>
 	</table>
+	<div class="card-footer">
+		<a href="{{ route('home') }}" class="btn btn-xs btn-danger bottom-right">Back to Homepage</a>
+
+	</div>
 	<div>
 		@endsection
