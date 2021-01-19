@@ -17,8 +17,9 @@ class CreateBooksTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->string('author');
-            $table->string('desc');
-            $table->string('series');
+            $table->string('desc')->default("N/A")->nullable();
+            $table->string('series')->default("N/A")->nullable();
+            $table->string('country')->default("N/A");
             $table->boolean('avaliable')->default(0);
 
             $table->timestamps();

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Book;
 use Illuminate\Http\Request;
+
+use function GuzzleHttp\Promise\all;
 
 class BookController extends Controller
 {
@@ -14,6 +17,8 @@ class BookController extends Controller
     public function index()
     {
         //
+        $books = Book::all();
+        return view('index', compact('books'));
     }
 
     /**
@@ -24,6 +29,7 @@ class BookController extends Controller
     public function create()
     {
         //
+        return view('create');
     }
 
     /**
@@ -35,6 +41,15 @@ class BookController extends Controller
     public function store(Request $request)
     {
         //
+        $InData = $request->validate([
+            'title'=>'required|max:255',
+            'author'=>'required|max:255',
+            'desc'=>'max:255',
+            'series'=>'max:255',
+            'country'=>'max:255'
+            ]);
+        $book = Book::create($InData);
+        return redirect('/books');    
     }
 
     /**
@@ -46,6 +61,7 @@ class BookController extends Controller
     public function show($id)
     {
         //
+
     }
 
     /**
@@ -56,7 +72,8 @@ class BookController extends Controller
      */
     public function edit($id)
     {
-        //
+        $books = Book::findOrFail($id);
+        return view('edit', compact('books'));
     }
 
     /**
@@ -68,7 +85,16 @@ class BookController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $UpdateData = $request->validate([
+            'title'=>'required|max:255',
+            'author'=>'required|max:255',
+            'desc'=>'max:255',
+            'series'=>'max:255',
+            'country'=>'max:255'
+            ]);
+        
+            Book::whereId($id)->update($UpdateData);
+            return redirect('/books');
     }
 
     /**
@@ -79,6 +105,9 @@ class BookController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $books = Book::findOrFail($id);
+        $books->delete();
+
+        return ('/books');
     }
 }
