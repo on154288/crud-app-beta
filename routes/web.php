@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BookController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('books', 'BookController');
+Route::resource('books', 'BookController')->middleware('role:admin');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

@@ -15,7 +15,10 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+
+                    @if(Auth::user()->hasRole('admin'));
                     <a href="{{ route('books.index') }}" class="btn btn-block btn-danger">Library Manager</a>
+                    @endif
                 </div>
             </div>
         </div>
