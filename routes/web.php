@@ -19,7 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('books', 'BookController')->middleware('role:admin');
+Route::resource('books', 'BookController')->middleware('permission:book-read');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

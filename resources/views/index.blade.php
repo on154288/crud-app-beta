@@ -45,13 +45,25 @@
 				<td>Yes</td>
 				@else
 				<td>No</td>
-				@endif
-				<td class="text-center"><a href="{{ route('books.edit', $book->id)}}" class="btn btn-primary btn-sm"">Edit</a>
+                @endif
+
+                <td class="text-center">
+                @if(Auth::user()->hasPermission('book-update'))
+                <a href="{{ route('books.edit', $book->id)}}" class="btn btn-primary btn-sm"">Edit</a>
+                @else
+                 <button class="btn btn-secondary btn-sm"> Edit </button>
+                @endif
+
+                @if(Auth::user()->hasPermission('book-delete'))
                 <form action=" {{ route('books.destroy', $book->id)}}" method="post" style="display: inline-block">
-						@csrf
-						@method('DELETE')
-						<button class="btn btn-danger btn-sm"" type=" submit">Delete</button>
-						</form>
+					@csrf
+					@method('DELETE')
+					<button class="btn btn-danger btn-sm"" type=" submit">Delete</button>
+                </form>
+                @else
+                    <button class="btn btn-secondary btn-sm"> Delete </button>
+                @endif
+
 				</td>
 			</tr>
 			@endforeach

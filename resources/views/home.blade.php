@@ -16,7 +16,7 @@
 
                     {{ __('You are logged in!') }}
 
-                    @if(Auth::user()->hasRole('admin'));
+                    @if(Auth::user()->hasPermission('book-read'));
                     <a href="{{ route('books.index') }}" class="btn btn-block btn-danger">Library Manager</a>
                     @endif
                 </div>
