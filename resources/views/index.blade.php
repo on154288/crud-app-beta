@@ -14,9 +14,13 @@
 
 <div class="push-top">
 	<div class="card-header">
-		Libary Manager Application
+        Libary Manager Application
 
-		<a href="{{ route('books.create') }}" class="btn btn-xs btn-danger pull-right top-right">Add Book</a>
+        @if(Auth::user()->hasPermission('book-create'))
+        <a href="{{ route('books.create') }}" class="btn btn-xs btn-danger pull-right top-right">Add Book</a>
+        @else
+            <button class="btn btn-xs btn-secondary pull-right top-right"> Add Book </button>
+        @endif
 
 	</div>
 	<table class="table table-bordered thead-dark">
